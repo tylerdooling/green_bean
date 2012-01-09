@@ -1,0 +1,27 @@
+%h1 Listing foods
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Measurement unit
+    %th Calories
+    %th Food type
+    %th
+    %th
+    %th
+
+  - @foods.each do |food|
+    %tr
+      %td= food.name
+      %td= food.description
+      %td= food.measurement_unit
+      %td= food.calories
+      %td= food.food_type
+      %td= link_to 'Show', food
+      %td= link_to 'Edit', edit_food_path(food)
+      %td= link_to 'Destroy', food, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Food', new_food_path

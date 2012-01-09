@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @food.name
+%p
+  %b Description:
+  = @food.description
+%p
+  %b Measurement unit:
+  = @food.measurement_unit
+%p
+  %b Calories:
+  = @food.calories
+%p
+  %b Food type:
+  = @food.food_type
+
+= link_to 'Edit', edit_food_path(@food)
+\|
+= link_to 'Back', foods_path
