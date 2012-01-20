@@ -5,7 +5,7 @@
   = @food.name
 %p
   %b Description:
-  = @food.description
+  = markdown(@food.description)
 %p
   %b Measurement unit:
   = @food.measurement_unit
@@ -13,8 +13,8 @@
   %b Calories:
   = @food.calories
 %p
-  %b Food type:
-  = @food.food_type
+  %b Food group:
+  = @food.food_group
 
 = link_to 'Edit', edit_food_path(@food)
 \|

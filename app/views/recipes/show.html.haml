@@ -1,0 +1,38 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @recipe.name
+%p
+  %b Recipe type:
+  = @recipe.recipe_type
+%p
+  %b Servings:
+  = @recipe.servings
+%p
+  %b Prep time:
+  = @recipe.prep_time
+%p
+  %b Cook time:
+  = @recipe.cook_time
+%p
+  %b Ingredients:
+  - @recipe.ingredients.each do |i|
+    %div
+      %label= i.name
+      %label= i.quantity
+%p
+  %b Tags:
+  = @recipe.tags.map {|t| t.name }.join(", ")
+.s
+%p
+  %b Rating:
+  - @recipe.rating.times do
+    &#9733;
+%p
+  %b Instructions:
+  = markdown @recipe.instructions
+
+= link_to 'Edit', edit_recipe_path(@recipe)
+\|
+= link_to 'Back', recipes_path

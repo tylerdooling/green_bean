@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @ingredient
+= link_to 'Show', recipe_ingredient_path(@recipe, @ingredient)
 \|
-= link_to 'Back', ingredients_path
+= link_to 'Back', recipe_ingredients_path(@recipe)

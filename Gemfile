@@ -7,6 +7,7 @@ gem 'rails', '3.1.3'
 
 gem 'sqlite3'
 gem 'haml-rails'
+gem 'bluecloth'
 
 
 # Gems used only for assets and not required
@@ -35,4 +36,5 @@ group :test, :development do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
   gem "rspec-rails", "~> 2.6"
+  gem "pry"
 end

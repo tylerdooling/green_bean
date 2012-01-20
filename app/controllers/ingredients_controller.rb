@@ -1,8 +1,8 @@
 class IngredientsController < ApplicationController
-  # GET /ingredients
-  # GET /ingredients.json
+
   def index
-    @ingredients = Ingredient.all
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredients = @recipe.ingredients
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,17 +34,19 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/1/edit
   def edit
-    @ingredient = Ingredient.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.find(params[:id])
   end
 
   # POST /ingredients
   # POST /ingredients.json
   def create
-    @ingredient = Ingredient.new(params[:ingredient])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.build(:item => Food.find(params[:ingredient][:item_id]), :quantity => params[:ingredient][:quantity])
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully created.' }
+        format.html { redirect_to recipe_ingredients_path(@recipe), notice: 'Ingredient was successfully created.' }
         format.json { render json: @ingredient, status: :created, location: @ingredient }
       else
         format.html { render action: "new" }

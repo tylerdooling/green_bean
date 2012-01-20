@@ -1,0 +1,35 @@
+%h1 Listing recipes
+
+%table
+  %tr
+    %th Name
+    %th Recipe type
+    %th Servings
+    %th Prep time
+    %th Cook time
+    %th Ingredients
+    %th Tags
+    %th Rating
+    %th Instructions
+    %th
+    %th
+    %th
+
+  - @recipes.each do |recipe|
+    %tr
+      %td= recipe.name
+      %td= recipe.recipe_type
+      %td= recipe.servings
+      %td= recipe.prep_time
+      %td= recipe.cook_time
+      %td= recipe.ingredients.map {|i| i.name }.join(",")
+      %td= recipe.tags.map {|t| t.name }.join(",")
+      %td= recipe.rating
+      %td= recipe.instructions
+      %td= link_to 'Show', recipe
+      %td= link_to 'Edit', edit_recipe_path(recipe)
+      %td= link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Recipe', new_recipe_path

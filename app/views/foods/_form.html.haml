@@ -14,12 +14,14 @@
     = f.text_area :description
   .field
     = f.label :measurement_unit
-    = f.text_field :measurement_unit
+    = f.select :measurement_unit, options_for_select(measurement_unit_options, @food.measurement_unit)
   .field
     = f.label :calories
     = f.number_field :calories
+    %label per unit
   .field
-    = f.label :food_type
-    = f.text_field :food_type
+    = f.label :food_group
+    = f.select :food_group, options_for_select(food_group_options, @food.food_group)
   .actions
+    = hidden_field_tag :return_url, @request_url.to_s
     = f.submit 'Save'

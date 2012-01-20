@@ -1,0 +1,50 @@
+= form_for @recipe do |f|
+  -if @recipe.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
+      %ul
+        - @recipe.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :recipe_type
+    = f.text_field :recipe_type
+  .field
+    = f.label :servings
+    = f.number_field :servings
+  .field
+    = f.label :prep_time
+    = f.number_field :prep_time
+  .field
+    = f.label :cook_time
+    = f.number_field :cook_time
+  .field
+    = f.label :rating
+    = f.number_field :rating
+  .field
+    = f.label :instructions
+    %br/
+    = f.text_area :instructions
+
+  = fields_for :tags do |t|
+    .field
+      = label_tag :tags
+      = text_field_tag :tags, @recipe.tags.map {|t| t.name }.join(", ")
+
+  = link_to "Edit ingredients", recipe_ingredients_path(@recipe)
+
+  -# TODO Add this to screen
+  -#- @recipe.ingredients.each do |i|
+    -#= fields_for "ingredients[]", i do |ifm|
+      -#.field
+        -#= ifm.collection_select :item_id, Food.all, :id, :name, :prompt => "Select an ingredient"
+        -#= ifm.label :quantity
+        -#= ifm.text_field :quantity
+
+
+
+  .actions
+    = f.submit 'Save'

@@ -25,6 +25,7 @@ class FoodsController < ApplicationController
   # GET /foods/new.json
   def new
     @food = Food.new
+    @request_url = request.env['HTTP_REFERER']
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,7 @@ class FoodsController < ApplicationController
   # GET /foods/1/edit
   def edit
     @food = Food.find(params[:id])
+    @request_url = request.env['HTTP_REFERER']
   end
 
   # POST /foods
@@ -44,7 +46,8 @@ class FoodsController < ApplicationController
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to @food, notice: 'Food was successfully created.' }
+        url = params[:return_url] || @food
+        format.html { redirect_to url, notice: 'Food was successfully created.' }
         format.json { render json: @food, status: :created, location: @food }
       else
         format.html { render action: "new" }

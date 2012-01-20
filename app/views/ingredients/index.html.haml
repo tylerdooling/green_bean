@@ -1,19 +1,20 @@
-%h1 Listing ingredients
+%h1
+  Ingredients for
+  = " #{@recipe.name}"
 
 %table
   %tr
+    %th Name
     %th Quantity
-    %th
-    %th
     %th
 
   - @ingredients.each do |ingredient|
     %tr
-      %td= ingredient.quantity
-      %td= link_to 'Show', ingredient
-      %td= link_to 'Edit', edit_ingredient_path(ingredient)
-      %td= link_to 'Destroy', ingredient, :confirm => 'Are you sure?', :method => :delete
+      %td= ingredient.name
+      %td= "#{ingredient.quantity} #{ingredient.item.measurement_unit.pluralize}"
+      %td= link_to 'Edit', edit_recipe_ingredient_path(@recipe, ingredient)
+      -#%td= link_to 'Destroy', ingredient, :confirm => 'Are you sure?', :method => :delete, :controller => :ingredients
 
 %br
 
-= link_to 'New Ingredient', new_ingredient_path
+= link_to 'Add Ingredient', new_recipe_ingredient_path
