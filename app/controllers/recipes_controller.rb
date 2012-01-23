@@ -2,7 +2,8 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @meal = Meal.where(:id => params[:meal_id]).first
+    @recipes = @meal.andand.recipes || Recipe.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +26,6 @@ class RecipesController < ApplicationController
   # GET /recipes/new.json
   def new
     @recipe = Recipe.new
-    10.times { @recipe.ingredients.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -98,6 +98,16 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to recipes_url }
       format.json { head :ok }
+    end
+  end
+
+  def add
+    @meal = Meal.where(:id => params[:meal_id]).first
+    @recipes = Recipe.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @recipes }
     end
   end
 end

@@ -1,5 +1,17 @@
 GreenBean::Application.routes.draw do
 
+  resources :meals do 
+    member do
+      post 'add_recipe'
+    end
+
+    resources :recipes do
+      collection do 
+        get 'add'
+      end
+    end
+  end
+
   resources :recipes do
     resources :ingredients
   end

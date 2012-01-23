@@ -16,7 +16,9 @@
   %b Cook time:
   = @recipe.cook_time
 %p
-  %b Ingredients:
+  %b 
+    Ingredients:
+    = link_to "edit", recipe_ingredients_path(@recipe)
   - @recipe.ingredients.each do |i|
     %div
       %label= i.name

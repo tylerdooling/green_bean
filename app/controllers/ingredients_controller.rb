@@ -24,7 +24,8 @@ class IngredientsController < ApplicationController
   # GET /ingredients/new
   # GET /ingredients/new.json
   def new
-    @ingredient = Ingredient.new
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,11 +59,12 @@ class IngredientsController < ApplicationController
   # PUT /ingredients/1
   # PUT /ingredients/1.json
   def update
-    @ingredient = Ingredient.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.find(params[:id])
 
     respond_to do |format|
-      if @ingredient.update_attributes(params[:ingredient])
-        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully updated.' }
+      if @ingredient.update_attributes(:quantity => params[:ingredient][:quantity])
+        format.html { redirect_to recipe_ingredients_path(@recipe), notice: 'Ingredient was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

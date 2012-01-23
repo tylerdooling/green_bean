@@ -1,4 +1,4 @@
-= form_for @ingredient, :url => recipe_ingredients_path(@ingredient.recipe) do |f|
+= form_for @ingredient, :url => "/recipes/#{@recipe.id}/ingredients/#{@ingredient.id}" do |f|
   -if @ingredient.errors.any?
     #error_explanation
       %h2= "#{pluralize(@ingredient.errors.count, "error")} prohibited this ingredient from being saved:"
@@ -8,10 +8,14 @@
 
   .field
     = f.label :item
-    = f.collection_select :item_id, Food.all, :id, :name
-    = link_to "New food", new_food_path
+    - unless @ingredient.item
+      = f.collection_select :item_id, Food.all, :id, :name
+      = link_to "New food", new_food_path
+    - else
+      %label= @ingredient.item.name
+
   .field
     = f.label :quantity
-    = f.number_field :quantity
+    = f.text_field :quantity
   .actions
     = f.submit 'Save'

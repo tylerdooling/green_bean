@@ -34,7 +34,7 @@
       = label_tag :tags
       = text_field_tag :tags, @recipe.tags.map {|t| t.name }.join(", ")
 
-  = link_to "Edit ingredients", recipe_ingredients_path(@recipe)
+  = link_to "Edit ingredients", recipe_ingredients_path(@recipe) if @recipe.id
 
   -# TODO Add this to screen
   -#- @recipe.ingredients.each do |i|
