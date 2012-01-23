@@ -82,6 +82,17 @@ class MealsController < ApplicationController
   end
 
   def add_recipe
-    # TODO
+    @meal = Meal.find(params[:id])
+    @meal.recipes << Recipe.find(params[:recipe_id]) unless @meal.recipes.where(:id => params[:recipe_id]).first
+
+    respond_to do |format|
+      if @meal.save
+        format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
+        format.json { render json: @meal, status: :created, location: @meal }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @meal.errors, status: :unprocessable_entity }
+      end
+    end
   end
 end

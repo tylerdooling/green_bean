@@ -4,6 +4,13 @@
   %b Name:
   = @meal.name
 
+%p
+  %b Included Recipes
+  %br/
+  - @meal.recipes.each do |r|
+    = link_to r.name, meal_recipe_path(@meal, r)
+
+
 = link_to 'Edit', edit_meal_path(@meal)
 \|
 = link_to 'Back', meals_path

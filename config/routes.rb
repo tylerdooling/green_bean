@@ -2,7 +2,7 @@ GreenBean::Application.routes.draw do
 
   resources :meals do 
     member do
-      post 'add_recipe'
+      post 'add_recipe/:recipe_id' => "meals#add_recipe"
     end
 
     resources :recipes do
