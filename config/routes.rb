@@ -1,15 +1,15 @@
 GreenBean::Application.routes.draw do
 
   resources :meals do 
-    member do
-      post 'add_recipe/:recipe_id' => "meals#add_recipe"
+    collection do 
     end
 
-    resources :recipes do
-      collection do 
-        get 'add'
-      end
+    member do
+      post 'add_recipe/:recipe_id' => "meals#add_recipe"
+      get 'select_recipe'
     end
+
+    resources :recipes
   end
 
   resources :recipes do

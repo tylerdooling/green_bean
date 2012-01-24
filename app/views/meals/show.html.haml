@@ -3,13 +3,23 @@
 %p
   %b Name:
   = @meal.name
+  %br/
+  %b Servings:
+  = @meal.servings
+  %br/
+  %b Calories/Serving:
+  = @meal.single_serving
+
 
 %p
   %b Included Recipes
   %br/
   - @meal.recipes.each do |r|
     = link_to r.name, meal_recipe_path(@meal, r)
+    %br/
 
+  %br/
+  = link_to "Add recipe", select_recipe_meal_path(@meal)
 
 = link_to 'Edit', edit_meal_path(@meal)
 \|

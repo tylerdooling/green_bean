@@ -95,4 +95,16 @@ class MealsController < ApplicationController
       end
     end
   end
+
+
+  def select_recipe
+    @meal = Meal.find(params[:id])
+    @recipes = Recipe.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @recipes }
+    end
+  end
+
 end

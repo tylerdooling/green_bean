@@ -5,4 +5,8 @@ class Recipe < ActiveRecord::Base
 
   accepts_nested_attributes_for :ingredients, :reject_if => lambda { |i| i[:item_id].blank? }
   accepts_nested_attributes_for :tags, :reject_if => lambda { |t| t[:name].blank? }
+
+  def single_serving
+    self.ingredients.inject(0) { |r, e| r + e.calories } / self.servings
+  end
 end

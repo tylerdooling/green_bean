@@ -25,7 +25,8 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   # GET /recipes/new.json
   def new
-    @recipe = Recipe.new
+    @meal = Meal.find(params[:meal_id]) if params[:meal_id]
+    @recipe = @meal ? @meal.recipes.build : Recipe.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +43,8 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(params[:recipe])
+    @meal = Meal.find(params[:meal_id]) if params[:meal_id]
+    @recipe = @meal ? @meal.recipes.create(params[:recipe]) : Recipe.new(params[:recipe])
 
     @recipe.ingredients = params[:ingredients].map {|i| 
       Ingredient.new(:item => Food.find(i.delete(:item_id)), :quantity => i[:quantity]) unless i[:item_id].blank? 
@@ -101,13 +103,4 @@ class RecipesController < ApplicationController
     end
   end
 
-  def add
-    @meal = Meal.where(:id => params[:meal_id]).first
-    @recipes = Recipe.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @recipes }
-    end
-  end
 end
