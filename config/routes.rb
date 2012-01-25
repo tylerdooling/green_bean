@@ -9,10 +9,15 @@ GreenBean::Application.routes.draw do
       get 'select_recipe'
     end
 
-    resources :recipes
+    resources :recipes do
+    end
   end
 
   resources :recipes do
+    collection do
+      get 'filter' => "recipes#filter"
+    end
+
     resources :ingredients
   end
 

@@ -1,31 +1,12 @@
-%h1
-  - if @meal
-    = "Recipes for #{@meal.name}"
-  - else
-    Listing recipes
+- content_for :header do
+  = link_to "", "/", "data-icon" => "home", "data-role" =>"button", "data-iconpos" => "notext", :class => "ui-btn-left"
+  = @meal ? "Recipes for #{@meal.name}" : "Recipes"
+  = link_to "New", new_recipe_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
-%table
-  %tr
-    %th Name
-    %th Type
-    %th Servings
-    %th Total time
-    %th
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li{"data-role" => "list-divider"}
+    %b Choose a type
+  - recipe_type_options.each do |k,v|
+    %li
+      = link_to v.pluralize.capitalize, filter_recipes_path(:recipe_type => v)
 
-  - @recipes.each do |recipe|
-    %tr
-      %td= recipe.name
-      %td= recipe.recipe_type
-      %td= recipe.servings
-      %td= recipe.prep_time + recipe.cook_time
-      %td
-        = link_to 'Show', recipe
-        = link_to 'Edit', edit_recipe_path(recipe)
-        = link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-- if @meal
-  = link_to 'Add', "/meals/#{@meal.id}/recipes/add"
-- else
-  = link_to 'New Recipe', new_recipe_path

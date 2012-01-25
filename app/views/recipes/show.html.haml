@@ -1,7 +1,7 @@
 - content_for :header do
-  = link_to "Back", meal_path(@meal), "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
-
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
   = @recipe.name
+  = link_to "Edit", edit_recipe_path(@recipe), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
 
 %p#notice= notice
 

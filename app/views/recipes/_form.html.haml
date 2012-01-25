@@ -6,31 +6,31 @@
         - @recipe.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  - fieldcontain do
     = f.label :name
     = f.text_field :name
-  .field
+
+  - fieldcontain do
     = f.label :recipe_type
-    = f.text_field :recipe_type
-  .field
+    = f.select :recipe_type, options_for_select(recipe_type_options, @recipe.recipe_type)
+  - fieldcontain do
     = f.label :servings
     = f.number_field :servings
-  .field
+  - fieldcontain do
     = f.label :prep_time
     = f.number_field :prep_time
-  .field
+  - fieldcontain do
     = f.label :cook_time
     = f.number_field :cook_time
-  .field
+  - fieldcontain do
     = f.label :rating
     = f.number_field :rating
-  .field
+  - fieldcontain do
     = f.label :instructions
-    %br/
     = f.text_area :instructions
 
   = fields_for :tags do |t|
-    .field
+    - fieldcontain do
       = label_tag :tags
       = text_field_tag :tags, @recipe.tags.map {|t| t.name }.join(", ")
 

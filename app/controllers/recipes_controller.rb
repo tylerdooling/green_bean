@@ -11,11 +11,22 @@ class RecipesController < ApplicationController
     end
   end
 
+  def filter
+    # TODO move to model
+    @recipe_type = params[:recipe_type]
+    @recipes = Recipe.find_all_by_recipe_type(@recipe_type)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @recipes }
+    end
+  end
+
   # GET /recipes/1
   # GET /recipes/1.json
   def show
     @meal = Meal.find(params[:meal_id]) if params[:meal_id]
-    @recipe = @meal.recipes.find(params[:id]) || Recipe.find(params[:id])
+    @recipe = @meal ? @meal.recipes.find(params[:id]) : Recipe.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -9,6 +9,21 @@ module ApplicationHelper
     %w(grains fruits vegetables dairy meats nuts fats spices).map { |e| [e, e] }
   end
 
+  def recipe_type_options
+    %w(appetizer side entre dessert).map { |e| [e, e] }
+  end
+
+  def fieldcontain(html_options = {})
+    #res = <<-DIV
+      #<div data-role = 'fieldcontain'>
+        ##{yield}
+      #</div>
+    #DIV
+    haml_tag :div, "data-role" => "fieldcontain" do
+      yield
+    end
+  end
+
   # Process text with Markdown
   def markdown(text)
     sanitize BlueCloth::new(text).to_html
