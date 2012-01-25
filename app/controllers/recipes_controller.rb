@@ -14,7 +14,8 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @recipe = Recipe.find(params[:id])
+    @meal = Meal.find(params[:meal_id]) if params[:meal_id]
+    @recipe = @meal.recipes.find(params[:id]) || Recipe.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

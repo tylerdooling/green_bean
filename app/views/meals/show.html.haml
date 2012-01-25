@@ -1,25 +1,28 @@
+- content_for :header do
+  = @meal.name
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @meal.name
-  %br/
-  %b Servings:
-  = @meal.servings
-  %br/
-  %b Calories/Serving:
-  = @meal.single_serving
-
-
-%p
-  %b Included Recipes
-  %br/
-  - @meal.recipes.each do |r|
-    = link_to r.name, meal_recipe_path(@meal, r)
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li
+    %b Servings:
+    = @meal.servings
     %br/
+    %b Calories/Serving:
+    = @meal.single_serving
 
-  %br/
-  = link_to "Add recipe", select_recipe_meal_path(@meal)
+%br/
+
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li{"data-role" => "list-divider"}
+    %b Included Recipes
+  - @meal.recipes.each do |r|
+    %li
+      = link_to r.name, meal_recipe_path(@meal, r)
+      %br/
+
+%br/
+= link_to "Add recipe", select_recipe_meal_path(@meal)
 
 = link_to 'Edit', edit_meal_path(@meal)
 \|

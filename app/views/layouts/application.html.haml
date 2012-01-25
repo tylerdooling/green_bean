@@ -1,14 +1,27 @@
 %html
-%head
-  %title GreenBean
-  = stylesheet_link_tag    "application" 
-  = javascript_include_tag "application" 
-  = csrf_meta_tags 
+  %head
+    %title GreenBean
+    %meta{:name =>"viewport", :content =>"width=device-width, initial-scale=1"}
+    %link{:rel => "stylesheet", :href => "http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css"}
+    %script{:src => "http://code.jquery.com/jquery-1.6.4.min.js"}
+    %script{:src => "http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"}
+    = csrf_meta_tags 
+    = javascript_include_tag "application" 
 
-%body
-  #nav
-    = link_to "Meals", meals_path
-    = link_to "Recipies", recipes_path
-    = link_to "Foods", foods_path
+  %body
+    %div{"data-role" => "page"}
+      %div{"data-role" => "header", "data-position" => "inline"}
+        %h1
+          = yield :header
 
-  = yield 
+      %div{"data-role" => "content"}
+        #nav
+          = link_to "Meals", meals_path
+          = link_to "Recipies", recipes_path
+          = link_to "Foods", foods_path
+
+        = yield
+
+      %div{"data-role" => "footer"}
+        = yield :footer
+
