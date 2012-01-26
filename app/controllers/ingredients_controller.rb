@@ -64,7 +64,7 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       if @ingredient.update_attributes(:quantity => params[:ingredient][:quantity])
-        format.html { redirect_to recipe_ingredients_path(@recipe), notice: 'Ingredient was successfully updated.' }
+        format.html { redirect_to recipe_path(@recipe), notice: 'Ingredient was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

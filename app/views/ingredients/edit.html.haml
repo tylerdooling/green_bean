@@ -1,7 +1,5 @@
-%h1 Editing ingredient
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = "Editing #{@ingredient.item.name}"
 
 = render 'form'
-
-= link_to 'Show', recipe_ingredient_path(@recipe, @ingredient)
-\|
-= link_to 'Back', recipe_ingredients_path(@recipe)

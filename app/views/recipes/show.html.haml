@@ -1,7 +1,7 @@
 - content_for :header do
-  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = link_to "Back", @meal ? meal_path(@meal) : recipes_path, "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
   = @recipe.name
-  = link_to "Edit", edit_recipe_path(@recipe), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
+  = link_to "Edit", edit_recipe_path(@recipe, :meal_id => @meal.andand.id), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
 
 %p#notice= notice
 
@@ -37,7 +37,7 @@
       %label{:class => "ui-li-count"}
         = "#{i.quantity} #{i.item.measurement_unit}"
 
-  %li{"data-icon" => "plus"}
+  %li{"data-icon" => "plus", "data-theme" => "a"}
     = link_to "Add ingredient", new_recipe_ingredient_path(@recipe)
 
 %ul{"data-role" => "listview", "data-inset" => "true"}
@@ -48,8 +48,3 @@
 
 %h3 Instructions
 = markdown @recipe.instructions
-
-
-= link_to 'Edit', edit_recipe_path(@recipe)
-\|
-= link_to 'Back', recipes_path

@@ -5,7 +5,7 @@ GreenBean::Application.routes.draw do
     end
 
     member do
-      post 'add_recipe/:recipe_id' => "meals#add_recipe"
+      post 'add_recipe' => "meals#add_recipe"
       get 'select_recipe'
     end
 

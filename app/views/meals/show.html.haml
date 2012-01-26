@@ -1,5 +1,7 @@
 - content_for :header do
+  = link_to "Back", meals_path, "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
   = @meal.name
+  = link_to "Edit", edit_meal_path(@meal), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
 
 %p#notice= notice
 
@@ -11,19 +13,11 @@
     %b Calories/Serving:
     = @meal.single_serving
 
-%br/
-
 %ul{"data-role" => "listview", "data-inset" => "true"}
   %li{"data-role" => "list-divider"}
     %b Included Recipes
   - @meal.recipes.each do |r|
     %li
       = link_to r.name, meal_recipe_path(@meal, r)
-      %br/
-
-%br/
-= link_to "Add recipe", select_recipe_meal_path(@meal)
-
-= link_to 'Edit', edit_meal_path(@meal)
-\|
-= link_to 'Back', meals_path
+  %li{"data-icon" => "plus", "data-theme" => "a"}
+    = link_to "Add recipes", select_recipe_meal_path(@meal)

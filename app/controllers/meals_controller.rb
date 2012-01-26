@@ -83,7 +83,8 @@ class MealsController < ApplicationController
 
   def add_recipe
     @meal = Meal.find(params[:id])
-    @meal.recipes << Recipe.find(params[:recipe_id]) unless @meal.recipes.where(:id => params[:recipe_id]).first
+    @recipes = Recipe.where("id in (?)", params[:recipes].first.andand.map{ |k,v| v }).reject {|e| !@meal.recipes.where(:id => e.id).first.nil? }
+    @meal.recipes << @recipes
 
     respond_to do |format|
       if @meal.save

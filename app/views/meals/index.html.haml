@@ -1,19 +1,10 @@
-%h1 Listing meals
+- content_for :header do
+  = link_to "", "/", "data-icon" => "home", "data-role" =>"button", "data-iconpos" => "notext", :class => "ui-btn-left"
+  Meals
+  = link_to "New", new_meal_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  - @meals.each do |m|
+    %li
+      = link_to m.name.capitalize, meal_path(m)
 
-  - @meals.each do |meal|
-    %tr
-      %td= meal.name
-      %td= link_to 'Show', meal
-      %td= link_to 'Edit', edit_meal_path(meal)
-      %td= link_to 'Destroy', meal, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Meal', new_meal_path
