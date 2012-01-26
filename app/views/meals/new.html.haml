@@ -1,5 +1,5 @@
-%h1 New meal
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  New meal
 
 = render 'form'
-
-= link_to 'Back', meals_path

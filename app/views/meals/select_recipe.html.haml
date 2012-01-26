@@ -1,7 +1,7 @@
 - content_for :header do
   = link_to "Back", meal_path(@meal), "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
   = "Add recipe to #{@meal.name}"
-  = link_to "New", new_meal_path(:meal_id => @meal.id), "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
+  = link_to "New", new_recipe_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
 = form_tag({:controller=>"meals", :action=>"add_recipe", :meal_id => @meal.id}, :method => :post)do
   %div{"data-role" => "controlgroup"}
