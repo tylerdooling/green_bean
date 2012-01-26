@@ -21,7 +21,11 @@ GreenBean::Application.routes.draw do
     resources :ingredients
   end
 
-  resources :foods
+  resources :foods do
+    collection do
+      get 'filter' => "foods#filter"
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -72,7 +76,7 @@ GreenBean::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'recipes#index'
+   root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

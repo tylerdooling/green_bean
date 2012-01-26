@@ -2,10 +2,22 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.json
   def index
-    @foods = Food.all
+    @food_group = params[:food_group]
+    @foods = Food.find_all_by_food_group(@food_group) if @food_group
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @foods }
+    end
+  end
+
+  def filter
+    # TODO move to model
+    @food_group = params[:food_group]
+    @foods = Food.find_all_by_food_group(@food_group) if @food_group
+
+    respond_to do |format|
+      format.html { render :index }
       format.json { render json: @foods }
     end
   end

@@ -46,5 +46,6 @@
   %li
     = @recipe.tags.map {|t| t.name }.join(", ")
 
-%h3 Instructions
-= markdown @recipe.instructions
+- fieldcontain do
+  %h3 Instructions
+  = markdown @recipe.instructions

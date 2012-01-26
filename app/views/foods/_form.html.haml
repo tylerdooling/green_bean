@@ -24,4 +24,4 @@
     = f.select :food_group, options_for_select(food_group_options, @food.food_group)
   .actions
     = hidden_field_tag :return_url, @request_url.to_s
-    = f.submit 'Save'
+    = f.submit 'Save', "data-theme" => "b"

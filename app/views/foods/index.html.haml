@@ -1,25 +1,20 @@
-%h1 Listing foods
+- content_for :header do
+  - if @foods
+    = link_to "Back", foods_path, "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  - else
+    = link_to "", "/", "data-icon" => "home", "data-role" =>"button", "data-iconpos" => "notext", :class => "ui-btn-left"
+  Foods
+  = link_to "New", new_food_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
-%table
-  %tr
-    %th Name
-    %th Measurement unit
-    %th Calories
-    %th Food group
-    %th
-    %th
-    %th
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  - if @foods
+    - @foods.each do |f|
+      %li
+        = link_to f.name, food_path(f)
 
-  - @foods.each do |food|
-    %tr
-      %td= food.name
-      %td= food.measurement_unit
-      %td= food.calories
-      %td= food.food_group
-      %td= link_to 'Show', food
-      %td= link_to 'Edit', edit_food_path(food)
-      %td= link_to 'Destroy', food, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Food', new_food_path
+  - else
+    %li{"data-role" => "list-divider"}
+      %b Choose a food group
+    - food_group_options.each do |k,v|
+      %li
+        = link_to v.capitalize, filter_foods_path(:food_group => v)

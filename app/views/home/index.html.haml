@@ -1,0 +1,11 @@
+- content_for :header do
+  Home
+
+
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li
+    = link_to "Meals", meals_path
+  %li
+    = link_to "Recipies", recipes_path
+  %li
+    = link_to "Foods", foods_path

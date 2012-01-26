@@ -6,16 +6,14 @@
         - @ingredient.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :item
+  - fieldcontain do
     - unless @ingredient.item
-      = f.collection_select :item_id, Food.all, :id, :name
-      = link_to "New food", new_food_path
-    - else
-      %label= @ingredient.item.name
+      = f.label :item_id
+      = f.collection_select :item_id, Food.all, :id, :name, :prompt => true, :selected => @ingredient.item.andand.id
 
-  .field
+  - fieldcontain do
     = f.label :quantity
     = f.text_field :quantity
-  .actions
-    = f.submit 'Save'
+
+  - fieldcontain do
+    = f.submit 'Save', "data-theme" => "b"

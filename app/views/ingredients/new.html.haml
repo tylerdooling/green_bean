@@ -1,5 +1,6 @@
-%h1 New ingredient
+- content_for :header do
+  = link_to "Back", recipe_path(@recipe), "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  New ingredient
+  = link_to "New food", new_food_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
 = render 'form'
-
-= link_to 'Back', recipe_ingredients_path

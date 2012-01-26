@@ -1,21 +1,24 @@
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = @food.name
+  = link_to "Edit", edit_food_path(@food), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @food.name
-%p
-  %b Description:
-  = markdown(@food.description)
-%p
-  %b Measurement unit:
-  = @food.measurement_unit
-%p
-  %b Calories:
-  = @food.calories
-%p
-  %b Food group:
-  = @food.food_group
-
-= link_to 'Edit', edit_food_path(@food)
-\|
-= link_to 'Back', foods_path
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li
+    %p
+      %b Name:
+      = @food.name
+    %p
+      %b Description:
+      = markdown(@food.description)
+    %p
+      %b Measurement unit:
+      = @food.measurement_unit
+    %p
+      %b Calories:
+      = @food.calories
+    %p
+      %b Food group:
+      = @food.food_group
