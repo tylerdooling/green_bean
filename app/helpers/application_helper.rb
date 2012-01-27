@@ -13,6 +13,10 @@ module ApplicationHelper
     %w(appetizer side entre dessert).map { |e| [e, e] }
   end
 
+  def meal_time_options
+    %w(breakfast lunch dinner snack).map { |e| [e, e] }
+  end
+
   def fieldcontain(html_options = {})
     #res = <<-DIV
       #<div data-role = 'fieldcontain'>

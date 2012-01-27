@@ -3,7 +3,7 @@
   Meals
   = link_to "New", new_meal_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
-%ul{"data-role" => "listview", "data-inset" => "true"}
+%ul{"data-role" => "listview", "data-inset" => "true", "data-filter" => "true"}
   - @meals.each do |m|
     %li
       = link_to m.name.capitalize, meal_path(m)

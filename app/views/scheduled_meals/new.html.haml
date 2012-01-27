@@ -1,2 +1,5 @@
-%h1 ScheduledMeals#new
-%p Find me in app/views/scheduled_meals/new.html.haml
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  New Scheduled Meal
+
+= render 'form'

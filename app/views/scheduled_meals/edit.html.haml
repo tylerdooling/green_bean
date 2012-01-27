@@ -1,2 +1,5 @@
-%h1 ScheduledMeals#edit
-%p Find me in app/views/scheduled_meals/edit.html.haml
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  Edit Scheduled Meal
+
+= render 'form'

@@ -1,0 +1,25 @@
+= form_for @scheduled_meal do |f|
+  -if @scheduled_meal.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@scheduled_meal.errors.count, "error")} prohibited this scheduled_meal from being saved:"
+      %ul
+        - @scheduled_meal.errors.full_messages.each do |msg|
+          %li= msg
+
+  - fieldcontain do
+    = f.label :meal
+    %b
+      = @scheduled_meal.meal.andand.name
+    = f.hidden_field :meal_id, :value => @scheduled_meal.meal.id
+  - fieldcontain do
+    = f.label :meal_date
+    = text_field_tag "scheduled_meal[meal_date]", @scheduled_meal.meal_date.strftime("%b %d, %Y"), :type => :date
+  - fieldcontain do
+    = f.label :meal_time
+    = f.select :meal_time, options_for_select(meal_time_options, @scheduled_meal.meal_time), :prompt => true
+  - fieldcontain do
+    = f.label :servings
+    = f.number_field :servings
+  - fieldcontain do
+    = hidden_field_tag :return_url, @request_url.to_s
+    = f.submit 'Save', "data-theme" => "b"

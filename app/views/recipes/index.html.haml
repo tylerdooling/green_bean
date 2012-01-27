@@ -3,7 +3,7 @@
   = @meal ? "Recipes for #{@meal.name}" : "Recipes"
   = link_to "New", new_recipe_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
-%ul{"data-role" => "listview", "data-inset" => "true"}
+%ul{"data-role" => "listview", "data-inset" => "true", "data-filter" => "true"}
   %li{"data-role" => "list-divider"}
     %b Choose a type
   - recipe_type_options.each do |k,v|

@@ -1,14 +1,24 @@
 - content_for :header do
-  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
-  Calendar
+  = link_to "Back", "/", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  Meal Calendar
 
-%ul{"data-role" => "listview"}
-  - @dates.each do |date, meals|
+- @dates.each do |date, meals|
+  %ul{"data-role" => "listview", "data-inset" => "true"}
     %li{"data-role" => "list-divider"}
-      = date
-      - meals.each do |m|
-        %li
-          = link_to m.name, scheduled_meals_show_path(m)
+      = date.strftime("%A - %b %e")
+
+    - meals.each do |m|
       %li
-        = link_to "Add meal", scheduled_meals_new_path
+        = link_to edit_scheduled_meal_path(m) do
+          %h3= m.name
+          %p{:class => "ui-li-count"}
+            = "#{m.single_serving} cal"
+
+    %li{"data-theme" => "a", "data-icon" => "plus"}
+      = link_to "Add meal", select_meal_scheduled_meals_path(:meal_date => date)
+
+- content_for :footer do
+  %span{"data-role" => "controlgroup", "data-type" => "horizontal"}
+    = link_to "Previous", scheduled_meals_path(:current_week => @current_week - 1), "data-icon" => "arrow-l", "data-role" =>"button", :class => "ui-btn-right"
+    = link_to "Next", scheduled_meals_path(:current_week => @current_week + 1), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
 

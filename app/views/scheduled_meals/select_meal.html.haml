@@ -1,0 +1,10 @@
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  Select a Meal
+  = link_to "New", new_scheduled_meal_path(:meal_date => @meal_date), "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
+
+%ul{"data-role" => "listview"}
+  - @meals.each do |m|
+    %li
+      = link_to m.name, new_scheduled_meal_path(:meal_id => m.id, :meal_date => @meal_date)
+
