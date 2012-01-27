@@ -1,5 +1,17 @@
 GreenBean::Application.routes.draw do
 
+  get "scheduled_meals/index"
+
+  get "scheduled_meals/new"
+
+  get "scheduled_meals/show"
+
+  get "scheduled_meals/edit"
+
+  get "scheduled_meals/create"
+
+  get "scheduled_meals/destroy"
+
   resources :meals do 
     collection do 
     end

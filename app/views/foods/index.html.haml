@@ -1,9 +1,6 @@
 - content_for :header do
-  - if @foods
-    = link_to "Back", foods_path, "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
-  - else
-    = link_to "", "/", "data-icon" => "home", "data-role" =>"button", "data-iconpos" => "notext", :class => "ui-btn-left"
-  = @foods ? @foods.first.andand.food_group.capitalize : "Foods"
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = @foods.blank? ? "Foods" : @foods.first.andand.food_group.capitalize
   = link_to "New", new_food_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
 %ul{"data-role" => "listview", "data-inset" => "true"}

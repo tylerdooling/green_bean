@@ -1,0 +1,14 @@
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  Calendar
+
+%ul{"data-role" => "listview"}
+  - @dates.each do |date, meals|
+    %li{"data-role" => "list-divider"}
+      = date
+      - meals.each do |m|
+        %li
+          = link_to m.name, scheduled_meals_show_path(m)
+      %li
+        = link_to "Add meal", scheduled_meals_new_path
+
