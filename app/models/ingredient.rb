@@ -1,14 +1,7 @@
 class Ingredient < ActiveRecord::Base
-  belongs_to :item, :polymorphic => true
-  belongs_to :recipe
+  has_many :recipe_ingredients
 
-  delegate :name, :to => :item
-  delegate :calories, :to => :item
-
-  validates :quantity, :numericality => {:greater_than => 0 }, :unless => lambda { |i| i.item.nil? }
-  validates :item_type, :inclusion => { :in => %w(Food Recipe), :message => "%{value} is not a valid ingredient" }
-
-  def calories
-    quantity * item.calories
-  end
+  validates :name, :food_group, :measurement_unit, :calories_per_unit, :presence => true
+  validates :food_group, :inclusion => { :in => %w(grains fruits vegetables dairy meats nuts fats spices), :message => "%{value} is not a valid food group" }
+  validates :calories_per_unit, :numericality => { :only_integer => true }
 end

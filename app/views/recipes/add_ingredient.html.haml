@@ -1,0 +1,18 @@
+- content_for :header do
+  = link_to "Back", recipe_path(@recipe), "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = "Add ingredient to #{@recipe.name}"
+  = link_to "New", new_ingredient_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
+
+= form_tag({:controller=>"recipes", :action=>"update"}, :method => :put, :id => 'ingredients_form') do
+
+  - @ingredients.each do |i|
+    - next if @recipe.recipe_ingredients.where(:ingredient_id => i.id).size > 0
+    %label
+      = "#{i.name} (#{i.measurement_unit})"
+      %input{:type => :checkbox, :name => "recipe[recipe_ingredients_attributes][][ingredient_id]", :value => i.id, 'data-inline' => 'true'}
+      = hidden_field_tag "recipe[recipe_ingredients_attributes][][measurement_unit]", i.measurement_unit
+      = hidden_field_tag "recipe[recipe_ingredients_attributes][][quantity]", 1
+
+
+- content_for :footer do
+  %a{:onclick => 'document.forms["ingredients_form"].submit();', "data-icon" => "home", "data-role" =>"button",  :class => "ui-btn-right"} Add Ingredients

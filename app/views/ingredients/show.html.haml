@@ -1,9 +1,24 @@
+- content_for :header do
+  = link_to "Back", filter_ingredients_path(:food_group => @ingredient.food_group), "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = @ingredient.name
+  = link_to "Edit", edit_ingredient_path(@ingredient), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"
+
 %p#notice= notice
 
-%p
-  %b Quantity:
-  = @ingredient.quantity
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li
+    %b Name:
+    = @ingredient.name
+  %li
+    %b Measurement unit:
+    = @ingredient.measurement_unit
+  %li
+    %b Calories (per unit):
+    = @ingredient.calories_per_unit
+  %li
+    %b Food group:
+    = @ingredient.food_group
 
-= link_to 'Edit', edit_ingredient_path(@ingredient)
-\|
-= link_to 'Back', ingredients_path
+- fieldcontain do
+  %b Description:
+  = markdown(@ingredient.description)

@@ -1,0 +1,22 @@
+- content_for :header do
+  = link_to "Back", "", "data-rel" => "back", "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = "Editing #{@recipe_ingredient.ingredient.name} in #{@recipe_ingredient.recipe.name}"
+
+= form_for @recipe_ingredient, :url => recipe_update_recipe_ingredient_path do |f|
+  -if @recipe_ingredient.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@recipe_ingredient.errors.count, "error")} prohibited this ingredient from being saved:"
+      %ul
+        - @recipe_ingredient.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :quantity
+    = f.text_field :quantity
+  .field
+    = f.label :measurement_unit
+    = f.select :measurement_unit, options_for_select(measurement_unit_options, @recipe_ingredient.measurement_unit)
+  .actions
+    = f.submit 'Save', "data-theme" => "b"
+
+

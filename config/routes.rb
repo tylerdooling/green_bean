@@ -1,5 +1,6 @@
 GreenBean::Application.routes.draw do
 
+
   resources :scheduled_meals do
     collection do
       get "select_meal" => "scheduled_meals#select_meal"
@@ -24,13 +25,19 @@ GreenBean::Application.routes.draw do
       get 'filter' => "recipes#filter"
     end
 
-    resources :ingredients
+    member do
+      get 'add_ingredient' => 'recipes#add_ingredient'
+    end
+
+    get 'recipe_ingredients/:recipe_ingredient_id/edit', :action => :edit_recipe_ingredient, :as => :edit_recipe_ingredient
+    put 'recipe_ingredients/:recipe_ingredient_id', :action => :update_recipe_ingredient, :as => :update_recipe_ingredient
   end
 
-  resources :foods do
+  resources :ingredients do
     collection do
-      get 'filter' => "foods#filter"
+      get 'filter' => "ingredients#filter"
     end
+
   end
 
   # The priority is based upon order of creation:

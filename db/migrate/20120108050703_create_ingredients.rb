@@ -1,9 +1,11 @@
 class CreateIngredients < ActiveRecord::Migration
   def change
     create_table :ingredients do |t|
-      t.integer :quantity
-      t.references :item, :polymorphic => true
-      t.references :recipe
+      t.string :name
+      t.text :description
+      t.string :measurement_unit
+      t.integer :calories_per_unit
+      t.string :food_group
 
       t.timestamps
     end

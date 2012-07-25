@@ -1,20 +1,17 @@
-%h1
-  Ingredients for
-  = " #{@recipe.name}"
+- content_for :header do
+  = link_to "Back", @ingredients ? ingredients_path : '/', "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  = @ingredients.blank? ? "Ingredients" : @ingredients.first.andand.food_group.capitalize
+  = link_to "New", new_ingredient_path, "data-icon" => "plus", "data-role" =>"button", :class => "ui-btn-right"
 
-%table
-  %tr
-    %th Name
-    %th Quantity
-    %th
+%ul{"data-role" => "listview", "data-inset" => "true", "data-filter" => "true"}
+  - if @ingredients
+    - @ingredients.each do |i|
+      %li
+        = link_to i.name, ingredient_path(i)
 
-  - @ingredients.each do |ingredient|
-    %tr
-      %td= ingredient.name
-      %td= "#{ingredient.quantity} #{ingredient.item.measurement_unit.pluralize}"
-      %td= link_to 'Edit', edit_recipe_ingredient_path(@recipe, ingredient)
-      -#%td= link_to 'Destroy', ingredient, :confirm => 'Are you sure?', :method => :delete, :controller => :ingredients
-
-%br
-
-= link_to 'Add Ingredient', new_recipe_ingredient_path
+  - else
+    %li{"data-role" => "list-divider"}
+      %b Choose a food group
+    - food_group_options.each do |k,v|
+      %li
+        = link_to v.capitalize, filter_ingredients_path(:food_group => v)

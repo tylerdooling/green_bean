@@ -5,3 +5,7 @@
  *= require_self
  *= require_tree . 
 */
+
+.ui-listview-filter-inset{
+  margin-top:-5px;
+}

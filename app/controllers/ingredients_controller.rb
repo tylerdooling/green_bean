@@ -1,11 +1,22 @@
 class IngredientsController < ApplicationController
+  # GET /ingredients
+  # GET /ingredients.json
+  respond_to :html, :json
 
   def index
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredients = @recipe.ingredients
+    @food_group = params[:food_group]
+    @ingredients = Ingredient.find_by_food_group(@food_group) if @food_group
+
+    respond_with @ingredients
+  end
+
+  def filter
+    # TODO move to model
+    @food_group = params[:food_group]
+    @ingredients = Ingredient.find_all_by_food_group(@food_group) if @food_group
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index }
       format.json { render json: @ingredients }
     end
   end
@@ -24,8 +35,8 @@ class IngredientsController < ApplicationController
   # GET /ingredients/new
   # GET /ingredients/new.json
   def new
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.build
+    @ingredient = Ingredient.new
+    @request_url = request.env['HTTP_REFERER']
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,19 +46,19 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/1/edit
   def edit
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.find(params[:id])
+    @ingredient = Ingredient.find(params[:id])
+    @request_url = request.env['HTTP_REFERER']
   end
 
   # POST /ingredients
   # POST /ingredients.json
   def create
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.build(:item => Food.find(params[:ingredient][:item_id]), :quantity => params[:ingredient][:quantity])
+    @ingredient = Ingredient.new(params[:ingredient])
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to recipe_path(@recipe), notice: 'Ingredient was successfully created.' }
+        url = params[:return_url] || @ingredient
+        format.html { redirect_to url, notice: 'Ingredient was successfully created.' }
         format.json { render json: @ingredient, status: :created, location: @ingredient }
       else
         format.html { render action: "new" }
@@ -59,12 +70,11 @@ class IngredientsController < ApplicationController
   # PUT /ingredients/1
   # PUT /ingredients/1.json
   def update
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.find(params[:id])
+    @ingredient = Ingredient.find(params[:id])
 
     respond_to do |format|
-      if @ingredient.update_attributes(:quantity => params[:ingredient][:quantity])
-        format.html { redirect_to recipe_path(@recipe), notice: 'Ingredient was successfully updated.' }
+      if @ingredient.update_attributes(params[:ingredient])
+        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

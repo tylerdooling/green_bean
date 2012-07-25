@@ -10,15 +10,19 @@
     %p
       %b Name:
       = @food.name
+  %li
     %p
       %b Description:
       = markdown(@food.description)
+  %li
     %p
       %b Measurement unit:
       = @food.measurement_unit
+  %li
     %p
       %b Calories:
       = @food.calories
+  %li
     %p
       %b Food group:
       = @food.food_group

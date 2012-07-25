@@ -3,3 +3,7 @@
   = "Editing #{@recipe.name}"
 
 = render 'form'
+
+
+- content_for :footer do
+  %a{:onclick => %(document.forms["edit_recipe_#{@recipe.id}"].submit();), "data-icon" => "home", "data-role" =>"button",  :class => "ui-btn-right"} Save

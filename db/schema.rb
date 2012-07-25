@@ -13,21 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20120127002520) do
 
-  create_table "foods", :force => true do |t|
+  create_table "ingredients", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.string   "measurement_unit"
-    t.integer  "calories"
+    t.integer  "calories_per_unit"
     t.string   "food_group"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "ingredients", :force => true do |t|
-    t.integer  "quantity"
-    t.integer  "item_id"
-    t.string   "item_type"
-    t.integer  "recipe_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,6 +33,15 @@ ActiveRecord::Schema.define(:version => 20120127002520) do
   create_table "meals_recipes", :force => true do |t|
     t.integer "meal_id"
     t.integer "recipe_id"
+  end
+
+  create_table "recipe_ingredients", :force => true do |t|
+    t.string   "measurement_unit"
+    t.integer  "quantity"
+    t.integer  "recipe_id"
+    t.integer  "ingredient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "recipes", :force => true do |t|
