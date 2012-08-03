@@ -4,6 +4,7 @@ GreenBean::Application.routes.draw do
   resources :scheduled_meals do
     collection do
       get "select_meal" => "scheduled_meals#select_meal"
+      get 'shopping_list' => 'scheduled_meals#shopping_list'
     end
   end
 

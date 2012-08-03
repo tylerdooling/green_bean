@@ -7,11 +7,8 @@
 
 %ul{"data-role" => "listview", "data-inset" => "true"}
   %li
-    %b Servings:
-    = @meal.servings
-    %br/
-    %b Calories/Serving:
-    = @meal.single_serving
+    %b Serving:
+    = "#{@meal.calories_per_serving} calories"
 
 %ul{"data-role" => "listview", "data-inset" => "true"}
   %li{"data-role" => "list-divider"}
@@ -19,5 +16,7 @@
   - @meal.recipes.each do |r|
     %li
       = link_to r.name, meal_recipe_path(@meal, r)
+      %label{:class => "ui-li-count"}
+        = "#{r.calories_per_serving} cps"
   %li{"data-icon" => "plus", "data-theme" => "a"}
     = link_to "Add recipes", select_recipe_meal_path(@meal)

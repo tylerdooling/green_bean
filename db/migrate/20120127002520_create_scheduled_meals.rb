@@ -4,7 +4,7 @@ class CreateScheduledMeals < ActiveRecord::Migration
       t.string :meal_time
       t.datetime :meal_date
       t.references :meal
-      t.integer :servings
+      t.float :servings
 
       t.timestamps
     end

@@ -15,7 +15,7 @@
       %div.ui-block-b
         = "Cook: #{@recipe.cook_time}"
       %div.ui-block-c
-        = "Cals: #{@recipe.single_serving}"
+        = "Cals: #{@recipe.calories_per_serving}"
 
 %b Tags:
 - @recipe.tags.each do |t|

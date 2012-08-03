@@ -1,0 +1,17 @@
+- content_for :header do
+  = link_to "Back", scheduled_meals_path(:current_week => @week), "data-icon" => "back", "data-role" =>"button", :class => "ui-btn-left"
+  Shopping List
+
+%ul{"data-role" => "listview", "data-inset" => "true"}
+  %li{"data-role" => "list-divider"}
+    = "#{@first_day_of_week.strftime("%b %e")} - #{(@first_day_of_week + 6).strftime("%b %e")}"
+  - @shopping_list.each do |k,v|
+    %li
+      = k
+      %p{:class => "ui-li-count"}
+        = v
+
+- content_for :footer do
+  %span{"data-role" => "controlgroup", "data-type" => "horizontal"}
+    = link_to "Previous", shopping_list_scheduled_meals_path(:current_week => @week - 1), "data-icon" => "arrow-l", "data-role" =>"button", :class => "ui-btn-right"
+    = link_to "Next", shopping_list_scheduled_meals_path(:current_week => @week + 1), "data-icon" => "arrow-r", "data-role" =>"button", :class => "ui-btn-right"

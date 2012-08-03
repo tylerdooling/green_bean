@@ -43,4 +43,5 @@ group :test, :development do
   gem "rspec-rails", "~> 2.6"
   gem "pry"
   gem 'heroku'
+  gem 'debugger'
 end

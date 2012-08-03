@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 20120127002520) do
     t.string   "name"
     t.text     "description"
     t.string   "measurement_unit"
-    t.integer  "calories_per_unit"
+    t.float    "calories_per_unit"
     t.string   "food_group"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(:version => 20120127002520) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "servings"
   end
 
   create_table "meals_recipes", :force => true do |t|
@@ -37,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20120127002520) do
 
   create_table "recipe_ingredients", :force => true do |t|
     t.string   "measurement_unit"
-    t.integer  "quantity"
+    t.float    "quantity"
     t.integer  "recipe_id"
     t.integer  "ingredient_id"
     t.datetime "created_at"
@@ -47,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20120127002520) do
   create_table "recipes", :force => true do |t|
     t.string   "name"
     t.string   "recipe_type"
-    t.integer  "servings"
+    t.float    "servings"
     t.integer  "prep_time"
     t.integer  "cook_time"
     t.integer  "rating"
@@ -65,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20120127002520) do
     t.string   "meal_time"
     t.datetime "meal_date"
     t.integer  "meal_id"
-    t.integer  "servings"
+    t.float    "servings"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

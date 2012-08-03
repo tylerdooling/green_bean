@@ -1,7 +1,7 @@
 = form_for @scheduled_meal do |f|
   -if @scheduled_meal.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@scheduled_meal.errors.count, "error")} prohibited this scheduled_meal from being saved:"
+    #error.ui-bar.ui-bar-e
+      %h3= "#{pluralize(@scheduled_meal.errors.count, "error")}"
       %ul
         - @scheduled_meal.errors.full_messages.each do |msg|
           %li= msg
@@ -10,7 +10,7 @@
     = f.label :meal
     %b
       = @scheduled_meal.meal.andand.name
-    = f.hidden_field :meal_id, :value => @scheduled_meal.meal.id
+    = f.hidden_field :meal_id, :value => @scheduled_meal.meal.andand.id
   - fieldcontain do
     = f.label :meal_date
     = text_field_tag "scheduled_meal[meal_date]", @scheduled_meal.meal_date.strftime("%b %d, %Y"), :type => :date
@@ -22,4 +22,6 @@
     = f.number_field :servings
   - fieldcontain do
     = hidden_field_tag :return_url, @request_url.to_s
+
+  .actions
     = f.submit 'Save', "data-theme" => "b"

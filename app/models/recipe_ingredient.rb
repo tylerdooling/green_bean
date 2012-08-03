@@ -5,7 +5,11 @@ class RecipeIngredient < ActiveRecord::Base
   validates :quantity, :numericality => {:greater_than => 0 }
   validates :measurement_unit, :inclusion => { :in => %w(tsp tbsp cup oz lb piece can box stick jar roll whole), :message => "%{value} is not a valid measurement unit"}
 
+  delegate :name, :to => :ingredient
+  delegate :measurement_unit, :to => :ingredient
+
   def calories
     quantity.to_i * (ingredient.try(:calories_per_unit, self.measurement_unit) || 0)
   end
+
 end

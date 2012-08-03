@@ -1,1 +1,1 @@
-rvm --create use ruby-1.9.3-rc1@green_bean > /dev/null
+rvm --create use ruby-1.9.3-p125@green_bean > /dev/null
